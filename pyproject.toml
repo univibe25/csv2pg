@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [project.scripts]
-csv2pg = "csv2pg:cli:app"
+csv2pg = "csv2pg.cli:app"
 
 [build-system]
 requires = ["hatchling"]

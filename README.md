@@ -35,7 +35,7 @@ uv pip install git+https://github.com/univibe25/csv2pg.git
 ### Basic Usage
 
 ```bash
-uv run csv2pg loadcsv --url postgresql://user:password@host:port/database
+uv run csv2pg --url postgresql://user:password@host:port/database
 ```
 
 ### Environment Variables
@@ -53,7 +53,6 @@ You can use Docker Compose to set up both the PostgreSQL database and the CSV lo
 
 ```yaml
 # docker-compose.yml
-version: "3"
 services:
   db:
     image: postgres:16-alpine
@@ -62,6 +61,8 @@ services:
       POSTGRES_PASSWORD: mypw
       POSTGRES_DB: mydb
     ports: ["5432:5432"]
+    networks:
+      - pgnet
 
   loader:
     image: python:3.12-slim
@@ -69,9 +70,15 @@ services:
       bash -c "
         pip install uv &&
         uv pip install git+https://github.com/univibe25/csv2pg.git &&
-        csv2pg loadcsv --url postgresql://myuser:mypw@db:5432/mydb
+        csv2pg --url postgresql://myuser:mypw@db:5432/mydb
       "
+    networks:
+      - pgnet
     depends_on: [db]
+
+networks:
+  pgnet:
+    driver: bridge
 ```
 
 To start the services:

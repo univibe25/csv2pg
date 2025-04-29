@@ -35,7 +35,7 @@ uv pip install git+https://github.com/univibe25/csv2pg.git
 ### Basic Usage
 
 ```bash
-csv2pg loadcsv --url postgresql://user:password@host:port/database
+uv run csv2pg loadcsv --url postgresql://user:password@host:port/database
 ```
 
 ### Environment Variables
@@ -44,7 +44,7 @@ You can use environment variables for configuration:
 
 ```bash
 export DATABASE_URL="postgresql://user:password@host:port/database"
-csv2pg loadcsv
+uv run csv2pg loadcsv
 ```
 
 ## Docker Deployment
